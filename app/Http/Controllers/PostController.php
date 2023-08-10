@@ -49,6 +49,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         //
+        $post = Post::findOrFail($post->id);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -57,6 +59,9 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         //
+        $post->update($request->post());
+
+        return redirect('/dashboard')->with('success', 'Post created successfully.');
     }
 
     /**

@@ -51,12 +51,18 @@
                             </div>
                             <div>
                                 {{ $post->created_at }}
+                                <br>
+                                @can('update', $post)
+                                    <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+                                @endcan
                             </div>
                         </div>
-                        <br>
-                        {{ $post->content }}
-                        <br>
-                        <br>
+                        <div class="mx-4">
+                            <br>
+                            {{ $post->content }}
+                            <br>
+                            <br>
+                        </div>
                         <div class="flex flex-row justify-between justify-items-start">
                             <div>
                                 {{ "Likes: ". $post->likes }}
