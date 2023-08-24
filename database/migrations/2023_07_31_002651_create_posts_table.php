@@ -13,9 +13,6 @@ return new class extends Migration {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->text('content');
-            $table->integer('likes');
-            $table->integer('replies');
-            $table->integer('reposts');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

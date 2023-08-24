@@ -8,17 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    use \Conner\Likeable\Likeable;
 
     protected $fillable = [
         'content',
-        // 'likes',
         'user_id'
     ];
 
     protected $attributes = [
-        'likes' => 0,
-        'replies' => 0,
-        'reposts' => 0
     ];
 
     public static $rules = [

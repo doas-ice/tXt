@@ -6,13 +6,13 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto mb-6 sm:px-6 lg:px-8">
+        {{-- <div class="max-w-7xl mx-auto mb-6 sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="max-w-7xl mx-auto mb-6 sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -27,7 +27,7 @@
 
                         <input type="hidden" id="user_id" name="user_id" value="{{ Auth::id() }}">
 
-                        <div class="flex items-center gap-4">
+                        <div class="flex justify-end items-center gap-4">
                             <x-primary-button>{{ __('Post') }}</x-primary-button>
 
                             @if (session('status') === 'post-created')
@@ -52,9 +52,16 @@
                             <div>
                                 {{ $post->created_at }}
                                 <br>
+                                <div class="flex flex-row justify-around">
                                 @can('update', $post)
-                                    <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+                                    <div>
+                                        <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('posts.destroy', $post->id) }}">Delete</a>
+                                    </div>
                                 @endcan
+                                </div>
                             </div>
                         </div>
                         <div class="mx-4">
@@ -65,13 +72,20 @@
                         </div>
                         <div class="flex flex-row justify-between justify-items-start">
                             <div>
-                                {{ "Likes: ". $post->likes }}
+                                <a href="{{ route('posts.like', $post->id) }}">
+                                    @if ($post->liked())
+                                        <i class="fa-solid fa-heart"></i>
+                                    @else
+                                        <i class="fa-regular fa-heart"></i>
+                                    @endif
+                                </a>
+                                &nbsp;{{ $post->likeCount }}
                             </div>
                             <div>
-                                {{ "Replies: ". $post->replies }}
+                                {{ "Replies: " }}
                             </div>
                             <div>
-                                {{ "Reposts: ". $post->reposts }}
+                                {{ "Reposts: " }}
                             </div>
                         </div>
                     </div>

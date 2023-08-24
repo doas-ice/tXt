@@ -61,7 +61,7 @@ class PostController extends Controller
         //
         $post->update($request->post());
 
-        return redirect('/dashboard')->with('success', 'Post created successfully.');
+        return redirect('/dashboard')->with('success', 'Post edited successfully.');
     }
 
     /**
@@ -70,5 +70,17 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+        $post->delete();
+        return redirect('/dashboard')->with('success', 'Post deleted successfully.');
+    }
+
+    public function like(Post $post) {
+
+        if ($post->liked()) {
+            $post->unlike();
+        } else {
+            $post->like();
+        }
+        return redirect('/dashboard')->with('success', 'Post liked successfully.');
     }
 }
