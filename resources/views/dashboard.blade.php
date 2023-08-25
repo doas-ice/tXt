@@ -79,10 +79,14 @@
                                         <i class="fa-regular fa-heart"></i>
                                     @endif
                                 </a>
-                                &nbsp;{{ $post->likeCount }}
+                                &nbsp;&nbsp;{{ $post->likeCount }}
                             </div>
                             <div>
-                                {{ "Replies: " }}
+                                <a href="{{ route('posts.reply', $post->id) }}">
+                                    <i class="fa-regular fa-comment"></i>
+                                    &nbsp;
+                                    {{ $post->replies_count }}
+                                </a>
                             </div>
                             <div>
                                 {{ "Reposts: " }}
